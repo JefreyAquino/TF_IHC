@@ -1,0 +1,508 @@
+/* ==== Scroll suave en todo el sitio ==== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==== Reset básico ==== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+
+
+
+
+/* ==== Estructura general ==== */
+body {
+  background-color: #f7f9fb;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* ==== Header/Nav ==== */
+header {
+  background-color: #4D6EC5;
+  padding: 15px 0;
+  color: white;
+}
+
+header .container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* MENÚ como botones en fila */
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  display: inline-block;
+}
+
+.navbar-links li a {
+  background-color: #ffffff;
+  color: #4D6EC5;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-links li a:hover {
+  background-color: #dce4ff;
+}
+
+
+.titulo-login {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #2f3e78;
+  margin-bottom: 20px;
+}
+
+
+/* ==== Hero (Crianza Coordinada + Login) ==== */
+.hero {
+  background-color: #e6f0ff;
+  padding: 50px 0;
+}
+
+.hero-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.hero-text {
+  flex: 2;
+  min-width: 300px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  color: #2f3e78;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.hero-buttons button,
+button.primary,
+button.secondary {
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.primary {
+  background-color: #4D6EC5;
+  color: white;
+}
+
+.primary:hover {
+  background-color: #3b56a1;
+}
+
+.secondary {
+  background-color: transparent;
+  border: 2px solid #4D6EC5;
+  color: #4D6EC5;
+}
+
+.secondary:hover {
+  background-color: #4D6EC5;
+  color: white;
+}
+
+.hero-image {
+  flex: 1;
+  text-align: right; /* ← esto alinea la imagen a la derecha */
+}
+
+
+.hero-image img {
+  max-width: 360px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* ==== Login form dentro del hero ==== */
+#login-form {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#login-form button {
+  display: block;
+  margin: 20px auto 0 auto; /* Centrado horizontal */
+  background-color: #4D6EC5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#login-form button:hover {
+  background-color: #3b56a1;
+}
+
+#login-form label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+#login-form input,
+#login-form select {
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* ==== Sección Servicios y Funciones ==== */
+.servicios,
+.funciones {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.servicios h2,
+.funciones h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2f3e78;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  width: 260px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card img {
+  max-width: 100px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #2f3e78;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.card button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4D6EC5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #3b56a1;
+}
+
+/* ==== Footer ==== */
+footer {
+  background-color: #4D6EC5;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.beneficios-ordenados {
+  background-color: #f0f8ff;
+  padding: 60px 20px;
+}
+
+.beneficios-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.beneficios-img {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.beneficios-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.beneficios-lista {
+  flex: 1;
+  min-width: 300px;
+}
+
+.beneficios-lista h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2f3e78;
+  text-align: left;
+}
+
+.beneficio {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.beneficio h3 {
+  font-size: 1.2rem;
+  color: #4D6EC5;
+  margin-bottom: 8px;
+}
+
+.beneficio p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ==== Estructura general ==== */
+body {
+  background-color: #f7f9fb;
+  color: #333;
+  line-height: 1.5;
+  padding: 0 1rem;
+}
+
+header {
+  background-color: #4D6EC5;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin-bottom: 0.3rem;
+}
+
+nav {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+nav button {
+  background-color: #e0e7ff;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+nav button:hover {
+  background-color: #c7d2fe;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.panel-section {
+  margin-bottom: 3rem;
+}
+
+.panel-section.hidden {
+  display: none;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  color: #2f3e78;
+}
+
+/* ==== Formularios ==== */
+form {
+  background-color: #ffffff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+form label {
+  display: block;
+  margin-top: 0.75rem;
+  font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+form button {
+  margin-top: 1rem;
+  background-color: #4D6EC5;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #3b56a1;
+}
+
+/* ==== Listas ==== */
+ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+ul li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 0.7rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul li span {
+  flex: 1;
+  margin-left: 0.5rem;
+}
+
+/* ==== Tablas ==== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table th, table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+table th {
+  background-color: #f0f4ff;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==== Imágenes de perfil ==== */
+#preview-foto {
+  display: block;
+  max-width: 150px;
+  border-radius: 50%;
+  margin: 1rem 0;
+}
+
+/* ==== Indicadores (gráficos) ==== */
+canvas {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+
+/* ==== Footer ==== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #777;
+}

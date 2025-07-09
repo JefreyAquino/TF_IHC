@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DiviTime - Inicio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+  <div class="container">
+    <div class="logo">DiviTime</div>
+    <nav>
+      <ul class="navbar-links">
+        <li><a href="#funcionalidades">Funcionalidades</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#">Ayuda</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>Crianza coordinada, hijos felices</h1>
+        <p>Organiza horarios, tareas y actividades entre padres separados. Menos conflictos, más bienestar para tus hijos.</p>
+
+        <!-- FORMULARIO DE LOGIN -->
+
+        <form id="login-form">
+            <h2 class="titulo-login">Iniciar sesión</h2>
+  <label for="username">Correo:</label>
+  <input type="text" id="username" required>
+
+  <label for="password">Contraseña:</label>
+  <input type="password" id="password" required>
+
+  <label for="role">Soy:</label>
+  <select id="role">
+    <option value="padre">Padre</option>
+    <option value="hijo">Hijo</option>
+  </select>
+
+  <button type="submit" class="primary">Iniciar</button>
+</form>
+
+      </div>
+
+      <div class="hero-image">
+        <img src="imagenes/Padrea app.png" alt="Padres usando app" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="servicios" id="funcionalidades">
+    <h2>Nuestro servicios</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="imagenes/CALENDARIO A LA IZUIERDA25-07-04 210628.png" alt="Calendario" width="150">
+        <h3>Calendario Compartido</h3>
+        <p>Planifica y visualiza actividades de forma conjunta para mejorar la organización familiar.</p>
+      </div>
+      <div class="card">
+        <img src="imagenes/Calendario compartido.png" alt="Agenda" width="150">
+        <h3>Agenda</h3>
+        <p>Sincroniza agendas y tareas entre ambos padres sin complicaciones.</p>
+      </div>
+      <div class="card">
+        <img src="imagenes/Roles.png" alt="Roles" width="150">
+        <h3>Define roles</h3>
+        <p>Establece responsabilidades claras para cada padre o tutor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNCIONES -->
+  <section class="funciones" >
+    <h2>¿Qué deseas gestionar hoy?</h2>
+    <p>Tenemos funciones clave para ayudarte a organizar tu vida familiar con claridad y menos estrés.</p>
+    <div class="cards">
+      <div class="card">
+        <img src="imagenes/Custodias y visitas.png" alt="Custodia" width="150">
+        <h3>Custodia y Visitas</h3>
+        <p>Consulta el horario visual de visitas y tiempos de crianza establecidos.</p>
+        <button onclick="location.href='dashboard.html'">Ver calendario</button>
+      </div>
+      <div class="card">
+        <img src="imagenes/Recordatorios.png" alt="Recordatorios" width="150">
+        <h3>Recordatorios y Alertas</h3>
+        <p>Notificaciones sobre citas, tareas y actividades importantes para los hijos.</p>
+        <button onclick="location.href='dashboard.html'">Ver recordatorios</button>
+      </div>
+      <div class="card">
+        <img src="imagenes/comunicacion.png" alt="Mensajes" width="150">
+        <h3>Comunicación entre Padres</h3>
+        <p>Chat centralizado para mantener conversaciones claras y cordiales.</p>
+        <button onclick="location.href='dashboard.html'">Ver mensajes</button>
+      </div>
+    </div>
+  </section>
+
+<section class="beneficios-ordenados" id="beneficios">
+  <div class="container beneficios-flex">
+    <!-- Imagen a la izquierda -->
+    <div class="beneficios-img">
+      <img src="imagenes/telefono-beneficios.png" alt="App en celular">
+    </div>
+
+    <!-- Beneficios en columna -->
+    <div class="beneficios-lista">
+      <h2>Beneficios de usar DiviTime</h2>
+
+      <div class="beneficio">
+        <h3>Menos conflictos</h3>
+        <p>Reduce malentendidos entre padres gracias a una organización clara.</p>
+      </div>
+      <div class="beneficio">
+        <h3>Organización clara</h3>
+        <p>Visualiza tareas, eventos y responsabilidades fácilmente.</p>
+      </div>
+      <div class="beneficio">
+        <h3>Bienestar emocional</h3>
+        <p>Los niños crecen con menos estrés cuando los padres están coordinados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  
+
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 DiviTime. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- SCRIPT LOGIN -->
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const nombre = document.getElementById("username").value.trim();
+      const rol = document.getElementById("role").value;
+      if (!nombre) {
+        alert("Por favor, ingresa tu nombre.");
+        return;
+      }
+      const usuario = { nombre, rol };
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+      window.location.href = "dashboard.html";
+    });
+  </script>
+
+</body>
+</html>

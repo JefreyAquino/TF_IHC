@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DiviTime | Panel</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>DiviTime</h1>
+    <p id="welcome"></p>
+  </header>
+
+  <nav>
+    <button onclick="mostrar('calendario')">Calendario</button>
+    <button onclick="mostrar('tareas')">Tareas</button>
+    <button onclick="mostrar('acuerdos')">Acuerdos</button>
+    <button onclick="mostrar('gastos')">Gastos</button>
+    <button onclick="mostrar('perfil')">Perfil</button>
+    <button onclick="mostrar('indicadores')">Indicadores</button>
+    <button onclick="mostrar('hijos')">Mis Hijos</button>
+    <button onclick="mostrar('privacidad')">Privacidad</button>
+    <button onclick="mostrar('mensajes')">Mensajes</button>
+    <button onclick="mostrar('guia')">Guía de uso</button>
+    <button onclick="logout()">Cerrar sesión</button>
+  </nav>
+
+  <main>
+    <!-- CALENDARIO -->
+    <section id="calendario" class="panel-section">
+      <h2>📅 Calendario familiar</h2>
+      <p>Bienvenido/a <strong id="nombre-usuario"></strong>. Aquí puedes ver los eventos importantes.</p>
+
+      <div id="proximo-evento" style="margin: 1rem 0; font-weight: bold;"></div>
+
+      <ul id="lista-eventos" style="margin-bottom: 1rem;"></ul>
+
+      <form id="form-evento">
+        <label for="fecha-evento">Fecha:</label>
+        <input type="date" id="fecha-evento" required />
+
+        <label for="descripcion-evento">Descripción:</label>
+        <input type="text" id="descripcion-evento" required placeholder="Ej. Visita médica" />
+
+        <button type="submit">Agregar evento</button>
+      </form>
+    </section>
+   
+    <!-- TAREAS -->
+    <section id="tareas" class="panel-section hidden">
+      <h2>🗒️ Lista de Tareas</h2>
+      <p>Organiza y sigue el progreso de las tareas familiares. Marca como completadas a medida que avanzas.</p>
+
+      <div style="margin: 1rem 0;">
+        <strong>Resumen:</strong>
+        <span id="contador-tareas">0 completadas / 0 totales</span>
+      </div>
+
+      <ul id="lista-tareas"></ul>
+      <p id="mensaje-vacio" style="color: gray; margin-top: 1rem;"></p>
+
+      <form id="form-tarea" style="margin-top: 1.5rem;">
+        <label for="nueva-tarea">Agregar nueva tarea:</label>
+        <input type="text" id="nueva-tarea" required placeholder="Ej. Limpiar habitación" />
+        <button type="submit">Agregar</button>
+      </form>
+    </section>
+    <!-- ACUERDOS -->
+    <section id="acuerdos" class="panel-section hidden">
+      <h2>📜 Acuerdos familiares</h2>
+      <p>Revisa las reglas y compromisos establecidos en la familia.</p>
+
+      <ul id="lista-acuerdos" style="margin-bottom: 1rem;"></ul>
+
+      <form id="form-acuerdo">
+        <label for="nuevo-acuerdo">Acuerdo:</label>
+        <input type="text" id="nuevo-acuerdo" required placeholder="Ej. No usar celular después de las 9 p.m." />
+
+        <label for="tipo-acuerdo">Tipo:</label>
+        <select id="tipo-acuerdo" required>
+          <option value="Regla">Regla</option>
+          <option value="Visita">Visita</option>
+          <option value="Tarea">Tarea</option>
+          <option value="Otro">Otro</option>
+        </select>
+
+        <label for="responsable-acuerdo">Responsable:</label>
+        <select id="responsable-acuerdo" required>
+          <option value="Padre">Padre</option>
+          <option value="Madre">Madre</option>
+          <option value="Ambos">Ambos</option>
+        </select>
+
+        <label for="fecha-acuerdo">Fecha:</label>
+        <input type="date" id="fecha-acuerdo" required />
+
+        <button type="submit">Agregar acuerdo</button>
+        <p id="msg-acuerdo" style="color: green; margin-top: 1rem;"></p>
+      </form>
+    </section>
+    <!-- GASTOS -->
+    <section id="gastos" class="panel-section hidden">
+      <h2>💰 Gastos familiares</h2>
+      <p>Registra los gastos realizados para mantener un control compartido.</p>
+
+      <ul id="lista-gastos" style="margin-bottom: 1rem;"></ul>
+      <p><strong>Total:</strong> S/ <span id="total-gastos">0.00</span></p>
+
+      <form id="form-gasto">
+        <label for="quien">Quién pagó:</label>
+        <input type="text" id="quien" required placeholder="Ej. Mamá, Papá, Ambos" />
+
+        <label for="monto">Monto (S/):</label>
+        <input type="number" id="monto" required step="0.01" />
+
+        <label for="detalle">Detalle del gasto:</label>
+        <input type="text" id="detalle" required placeholder="Ej. Compra de útiles escolares" />
+
+        <button type="submit">Agregar gasto</button>
+      </form>
+    </section>
+    <!-- PERFIL -->
+   <section id="perfil" class="panel-section hidden">
+  <h2 style="text-align: center;">👤 Mi perfil</h2>
+  <p style="text-align: center;">Consulta o actualiza tus datos personales.</p>
+
+    <div id="perfil-preview" style="margin: 1rem auto; text-align: center;">
+  <img id="preview-foto" src="" alt="Foto de perfil"
+     style="display: block; margin: 0 auto 10px auto; max-width: 150px; border-radius: 50%; display: none;" />
+
+    <p><strong>Nombre actual:</strong> <span id="nombre-actual"></span></p>
+    <p><strong>Rol:</strong> <span id="rol-actual"></span></p>
+  </div>
+
+      <form id="perfil-form">
+        <label for="nuevo-nombre">Nombre completo:</label>
+        <input type="text" id="nuevo-nombre" required />
+
+        <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fecha-nacimiento" />
+
+        <label for="email-usuario">Correo electrónico:</label>
+        <input type="email" id="email-usuario" placeholder="ejemplo@correo.com" />
+
+        <label for="telefono-usuario">Teléfono:</label>
+        <input type="tel" id="telefono-usuario" placeholder="+51 999 888 777" />
+
+        <label for="foto-perfil">Cambiar foto de perfil:</label>
+        <input type="file" id="foto-perfil" accept="image/*" />
+
+        <button type="submit">Guardar cambios</button>
+        <p id="msg-perfil" style="color: green; margin-top: 1rem;"></p>
+      </form>
+    </section>
+    <!-- INDICADORES -->
+    <section id="indicadores" class="panel-section hidden">
+      <h2>📊 Indicadores familiares</h2>
+      <p>Revisa visualmente el progreso de las tareas, visitas realizadas y gastos acumulados.</p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
+        <div style="flex: 1;">
+          <h4>✅ Tareas</h4>
+          <canvas id="graficoTareas" width="200" height="200"></canvas>
+        </div>
+        <div style="flex: 1;">
+          <h4>🏠 Visitas</h4>
+          <canvas id="graficoVisitas" width="200" height="200"></canvas>
+        </div>
+        <div style="flex: 1;">
+          <h4>💰 Gastos</h4>
+          <canvas id="graficoGastos" width="200" height="200"></canvas>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <p><strong>Resumen:</strong></p>
+        <ul>
+          <li><span id="resumen-tareas">Tareas completadas: --</span></li>
+          <li><span id="resumen-visitas">Visitas registradas: --</span></li>
+          <li><span id="resumen-gastos">Total de gastos: S/ --</span></li>
+        </ul>
+      </div>
+    </section>
+   <!-- HIJOS -->
+<section id="hijos" class="panel-section hidden">
+  <h2>👨‍👧 Mis Hijos</h2>
+  <p>Aquí puedes registrar a tus hijos/as y ver sus datos claramente.</p>
+
+  <form id="form-hijo" style="margin-bottom: 1rem;">
+    <label for="nombre-hijo">Nombre:</label>
+    <input type="text" id="nombre-hijo" required />
+
+    <label for="edad-hijo">Edad:</label>
+    <input type="number" id="edad-hijo" required min="0" />
+
+    <label for="rol-hijo">Rol en la familia:</label>
+    <select id="rol-hijo">
+      <option value="Estudiante">Estudiante</option>
+      <option value="Adolescente">Adolescente</option>
+      <option value="Niño/a">Niño/a</option>
+      <option value="Otro">Otro</option>
+    </select>
+
+    <button type="submit">➕ Agregar hijo/a</button>
+  </form>
+
+  <table style="width: 100%; border-collapse: collapse; text-align: left;">
+    <thead>
+      <tr>
+        <th style="padding: 8px;">Nombre</th>
+        <th style="padding: 8px;">Edad</th>
+        <th style="padding: 8px;">Rol</th>
+        <th style="padding: 8px;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="lista-hijos">
+      <!-- Las filas de hijos van aquí -->
+    </tbody>
+  </table>
+</section>
+
+    <!-- PRIVACIDAD -->
+    <section id="privacidad" class="panel-section hidden">
+  <h2>🔒 Configuración de privacidad</h2>
+  <p>Controla lo que tus hijos pueden ver en DiviTime.</p>
+
+  <form id="form-privacidad" style="margin-top: 1rem;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="text-align: left; padding: 8px;">Funcionalidad</th>
+          <th style="text-align: center; padding: 8px;">¿Mostrar al hijo/a?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 8px;">Ver tareas asignadas</td>
+          <td style="text-align: center;">
+            <input type="checkbox" id="mostrar-tareas-hijo" checked />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Ver gastos familiares</td>
+          <td style="text-align: center;">
+            <input type="checkbox" id="mostrar-gastos-hijo" />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Ver acuerdos familiares</td>
+          <td style="text-align: center;">
+            <input type="checkbox" id="mostrar-acuerdos-hijo" checked />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="submit" style="margin-top: 1rem;">💾 Guardar configuración</button>
+    <p id="msg-privacidad" style="color: green; margin-top: 10px;"></p>
+  </form>
+</section>
+
+     <!-- MENSAJES -->
+    <section id="mensajes" class="panel-section hidden">
+  <h2>💬 Mensajes</h2>
+  <p>Comunicación entre padres e hijos dentro de la plataforma.</p>
+
+  <div id="chat-mensajes" style="border: 1px solid #ccc; padding: 1rem; max-height: 250px; overflow-y: auto; background: #f9f9f9; margin-bottom: 1rem;">
+    <!-- Mensajes aquí -->
+  </div>
+
+  <form id="chat-form" style="display: flex; gap: 0.5rem;">
+    <input type="text" id="mensaje" required placeholder="Escribe tu mensaje..." style="flex: 1;" />
+    <button type="submit">Enviar</button>
+  </form>
+</section>
+
+    <!-- GUÍA DE USO -->
+    <section id="guia" class="panel-section hidden">
+      <h2>📖 Guía de uso</h2>
+      <div id="guia-contenido">
+        <!-- Esta sección se rellena dinámicamente según el rol -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>DiviTime © 2025 — Plataforma para familias conectadas</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
